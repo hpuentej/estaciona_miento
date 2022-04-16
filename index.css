@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+
+.titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #000;
+}
+
+.titulo__parrafo {
+  text-align: center;
+  color: rgb(101, 32, 101);
+}
+
+.titulo__1 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* Main */
+
+.estacionamiento {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+}
+
+.estacion_X {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.estaDisponible {
+  background-color: #59c359;
+  width: 7rem;
+  height: 5rem;
+  margin: 1rem;
+}
+
+.estaNoDisponible {
+  background-color: rgb(172, 65, 65);
+  width: 7rem;
+  height: 5rem;
+  margin: 1rem;
+}
+
+.estaReservado {
+  background-color: rgb(222, 238, 80);
+  width: 7rem;
+  height: 5rem;
+  margin: 1rem;
+}
+
+.estaOcupado {
+  background-color: rgb(51, 45, 220);
+  width: 7rem;
+  height: 5rem;
+  margin: 1rem;
+}
+
+
+
+
+
+
+.formulario__1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button__1 {
+  margin: 2rem;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
