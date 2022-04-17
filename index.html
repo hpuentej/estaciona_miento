@@ -7,7 +7,7 @@
     <title>Estacionamiento</title>
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body>
+  <body onload="cambiaDeColor()">
     <header>
       <h1 class="titulo">Estacionamiento</h1>
       <p class="titulo__parrafo">El patio seguro</p>
@@ -15,31 +15,31 @@
     <main>
       <section class="estacionamiento">
         <div class="estacion_X">
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
-          <div class="estaDisponible"></div>
+          <div class="estaA1 estaDisponible"></div>
+          <div class="estaB1 estaReservado"></div>
+          <div class="estaC1 estaOcupado"></div>
+          <div class="estaD1 estaOcupado"></div>
+          <div class="estaE1 estaDisponible"></div>
+          <div class="estaA2 estaDisponible"></div>
+          <div class="estaB2 estaNoDisponible"></div>
+          <div class="estaC2 estaDisponible"></div>
+          <div class="estaD2 estaDisponible"></div>
+          <div class="estaE2 estaNoDisponible"></div>
+          <div class="estaA3 estaDisponible"></div>
+          <div class="estaB3 estaDisponible"></div>
+          <div class="estaC3 estaReservado"></div>
+          <div class="estaD3 estaDisponible"></div>
+          <div class="estaE3 estaDisponible"></div>
+          <div class="estaA4 estaDisponible"></div>
+          <div class="estaB4 estaDisponible"></div>
+          <div class="estaC4 estaNoDisponible"></div>
+          <div class="estaD4 estaDisponible"></div>
+          <div class="estaE4 estaReservado"></div>
+          <div class="estaA5 estaOcupado"></div>
+          <div class="estaB5 estaOcupado"></div>
+          <div class="estaC5 estaDisponible"></div>
+          <div class="estaD5 estaReservado"></div>
+          <div class="estaE5 estaOcupado"></div>
         </div>
 
         <div class="datos"> 
@@ -49,7 +49,7 @@
             <label for="inputLugar">Elija el estacionamiento que desea reservar</label>
             <input class="inputLugar" type="text" placeholder="Ej. B1" />
 
-            <label for="inputTipo">Elija el estacionamiento que desea reservar</label>
+            <label for="inputTipo"> Cual sera el estado de lugar reservado?</label>
             <input class="inputTipo" type="text" placeholder="Ej. Disponible" />
 
           </form>
@@ -60,7 +60,26 @@
             </button>
           </div>
 
-          <p class="Confirmar"></p>
+          <p class="confirmar"></p>
+
+          <section class="placesControl">
+            <div class="statusLugar valor1">
+              <p >Disponibles: </p>
+              <p class="val1"></p>
+            </div> 
+            <div class="statusLugar valor2">
+              <p >Reservados: </p>
+              <p class="val2"></p>
+            </div>
+            <div class="statusLugar valor3">
+              <p >Ocupados: </p>
+              <p class="val3"></p>
+            </div>
+            <div class="statusLugar valor4">
+              <p >No Disponibles: </p>
+              <p class="val4"></p>
+            </div>
+          </section>
 
         </div>
       </section>
