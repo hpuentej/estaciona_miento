@@ -36,29 +36,29 @@
   grid-gap: 1rem;
 }
 
-.estaDisponible {
+.disponible {
   background-color: #59c359;
   width: 7rem;
   height: 5rem;
   margin: 1rem;
 }
 
-.estaNoDisponible {
-  background-color: rgb(172, 65, 65);
+.noDisponible {
+  background-color: rgb(51, 45, 220);
   width: 7rem;
   height: 5rem;
   margin: 1rem;
 }
 
-.estaReservado {
+.reservado {
   background-color: rgb(222, 238, 80);
   width: 7rem;
   height: 5rem;
   margin: 1rem;
 }
 
-.estaOcupado {
-  background-color: rgb(51, 45, 220);
+.ocupado {  
+  background-color: rgb(172, 65, 65);
   width: 7rem;
   height: 5rem;
   margin: 1rem;
