@@ -6,54 +6,128 @@ let listaLugares = ['A1', 'B1', 'C1', 'D1', 'E1',
                     'A4', 'B4', 'C4', 'D4', 'E4',
                     'A5', 'B5', 'C5', 'D5', 'E5'];
 
-// Registrar tipo de estacionamiento
+// Primer conteo de tipos de estacionamiento 
 
-function registrarTipos(tipos,listaLugares){
-  // localStorage.
-  if (JSON.parse(localStorage.getItem('tipos')) != null){
-    const tiposX = JSON.parse(localStorage.getItem('tipos'));
-    return setInterval(setCantidadTipos(tiposX), 1000);  // cada 1 segundos
-  } else {
-    console.log('No habia datos en el localStorage');
-    cantidadLugares(tipos, listaLugares);
-    localStorage.setItem('tipos', JSON.stringify(tipos));
-    return setInterval(setCantidadTipos(tipos), 1000);  // cada 1 segundos    
-  }
-}
- 
 function cantidadLugares(tipos, listaLugares) {
   for(lugar of listaLugares) {    
     const esta1 = document.querySelector(`.esta${lugar}`);
     const [clase0, clase1] = esta1.classList;
-    const clase = clase1;
-    if (clase === 'disponible') {
+    if (clase1 === 'disponible') {
       tipos.disponible += 1;
-    } else if (clase === 'noDisponible') {
+    } else if (clase1 === 'noDisponible') {
       tipos.noDisponible += 1;
-    } else if (clase === 'reservado') {
+    } else if (clase1 === 'reservado') {
       tipos.reservado += 1;
-    } else if (clase === 'ocupado') {
+    } else if (clase1 === 'ocupado') {
       tipos.ocupado += 1;
     }
-  }
-  return tipos;                      
+  }                    
 }
 
-function setCantidadTipos(tipos) {
+// Ver cantidad de cada tipo de estacionamiento
+
+function setCantidadTipos(tipos, listaLugares) {
   const valor_1 = document.querySelector(".val1");
   const valor_2 = document.querySelector(".val2");
   const valor_3 = document.querySelector(".val3");
   const valor_4 = document.querySelector(".val4");
-  
-  valor_1.innerText = `${tipos.disponible}` 
-  valor_2.innerText = `${tipos.reservado}`
-  valor_3.innerText = `${tipos.ocupado}` 
-  valor_4.innerText = `${tipos.noDisponible}` 
+
+  if (JSON.parse(localStorage.getItem('tipos')) != undefined){
+    const tiposX = JSON.parse(localStorage.getItem('tipos'));
+    valor_1.innerText = `${tiposX.disponible}` 
+    valor_2.innerText = `${tiposX.reservado}`
+    valor_3.innerText = `${tiposX.ocupado}` 
+    valor_4.innerText = `${tiposX.noDisponible}`
+
+    // const listaX_lugar = JSON.parse(localStorage.getItem('lista_Lugares'));
+    fijarColores();      
+
+    // localStorage.setItem('lista_Lugares', JSON.stringify(listaX_lugar));
+          
+  } else if (JSON.parse(localStorage.getItem('tipos')) == undefined) {
+    cantidadLugares(tipos, listaLugares);
+    localStorage.setItem('tipos', JSON.stringify(tipos));
+
+    valor_1.innerText = `${tipos.disponible}` 
+    valor_2.innerText = `${tipos.reservado}`
+    valor_3.innerText = `${tipos.ocupado}` 
+    valor_4.innerText = `${tipos.noDisponible}` 
+  } else {
+    valor_1.innerText = `${0}` 
+    valor_2.innerText = `${0}`
+    valor_3.innerText = `${0}` 
+    valor_4.innerText = `${0}`
+  }
 }
 
-// Fijar color de estacionamiento
+// Funcion para fijar los colores de los estacionamientos
 
-function onClickButtonElegir(tipos, listaLugares) {
+function fijarColores(){
+  const lugarLista = JSON.parse(localStorage.getItem('lista_Lugares'));
+  for(let lugar of lugarLista) {
+    const estacion = document.querySelector(`.esta${lugar.lugar}`);
+    // const [clase0, clase1] = estacion.classList;
+    if (lugar.tipo === 'disponible') {
+      estacion.classList.remove('noDisponible');
+      estacion.classList.remove('reservado');
+      estacion.classList.remove('ocupado');
+      estacion.classList.add('disponible');
+    } else if (lugar.tipo === 'noDisponible') {
+      estacion.classList.remove('disponible');
+      estacion.classList.remove('reservado');
+      estacion.classList.remove('ocupado');
+      estacion.classList.add('noDisponible');
+    } else if (lugar.tipo === 'reservado') {
+      estacion.classList.remove('disponible');
+      estacion.classList.remove('noDisponible');
+      estacion.classList.remove('ocupado');
+      estacion.classList.add('reservado');
+    } else if (lugar.tipo === 'ocupado') {
+      estacion.classList.remove('disponible');
+      estacion.classList.remove('noDisponible');
+      estacion.classList.remove('reservado');
+      estacion.classList.add('ocupado');
+    }
+  }
+}
+
+// Fijar lista de objetos con los lugares y sus tipos
+
+function fijarLugares(listaLugares){
+  const lugarLista = [];
+
+  for(let lugar of listaLugares) {
+    const estacion = document.querySelector(`.esta${lugar}`);
+    const [clase0, clase1] = estacion.classList;    
+    
+    if (clase1 === 'disponible') {
+      const lugarObjeto = {};
+      lugarObjeto.lugar = lugar;
+      lugarObjeto.tipo = 'disponible';
+      lugarLista.push(lugarObjeto);
+    } else if (clase1 === 'noDisponible') {
+      const lugarObjeto = {};
+      lugarObjeto.lugar = lugar;
+      lugarObjeto.tipo = 'noDisponible';
+      lugarLista.push(lugarObjeto);
+    } else if (clase1 === 'reservado') {
+      const lugarObjeto = {};
+      lugarObjeto.lugar = lugar;
+      lugarObjeto.tipo = 'reservado';
+      lugarLista.push(lugarObjeto);
+    } else if (clase1 === 'ocupado') {
+      const lugarObjeto = {};
+      lugarObjeto.lugar = lugar;
+      lugarObjeto.tipo = 'ocupado';
+      lugarLista.push(lugarObjeto);
+    }
+  }  
+  localStorage.setItem(`lista_Lugares`, JSON.stringify(lugarLista));
+}
+
+// Cambiar color de estacionamiento
+
+function onClickButtonElegir(tipos, listaLugares){
   const inputLugar = document.querySelector(".inputLugar");
   const lugarValue = inputLugar.value;
 
@@ -74,15 +148,32 @@ function onClickButtonElegir(tipos, listaLugares) {
   };
   
   if (list.includes(true)) {
-    const lugar = document.querySelector(`.esta${lugarValue}`); 
-    // localStorage.setItem('lugar', JSON.stringify(lugar));
-    // const lugarY = JSON.parse(localStorage.getItem('lugar'));     
-    lugar.className = `esta${lugarValue} ${tipoValue}`; // Cambiar clase y pintar el lugar
-    const lugarY = lugar.className;
-    localStorage.setItem('lugar', JSON.stringify(lugarY));
-    const lugarZ = JSON.parse(localStorage.getItem('lugar'));
-    lugarZ.className = `esta${lugarValue} ${tipoValue}`;
+    // localStorage.setItem(`${lugarValue}`, tipoValue);
+    const lugar = document.querySelector(`.esta${lugarValue}`);
+    const [clase0, clase1] = lugar.classList;
+
+    const tiposD = JSON.parse(localStorage.getItem('tipos'));
     
+    tiposD[clase1] -= 1;
+    tiposD[tipoValue] += 1;
+    localStorage.setItem('tipos', JSON.stringify(tiposD));
+    
+    registrarTipos(tipos,listaLugares); // modificar tipos
+
+    const listaX_lugar = JSON.parse(localStorage.getItem('lista_Lugares'));
+    
+    for (let lugarX of listaX_lugar) {
+      if(lugarX.lugar === lugarValue) {
+        lugarX.tipo = tipoValue;
+      }
+    }
+
+    localStorage.setItem('lista_Lugares', JSON.stringify(listaX_lugar));
+       
+    fijarColores();
+
+    // lugar.className = `esta${lugarValue} ${tipoValue}`; // Cambiar clase y pintar el lugar   
+
     const confirmar = document.querySelector(".confirmar"); 
     confirmar.innerText = `Ultimo lugar actualizado: El lugar ${lugarValue} tiene el estado ${tipoValue}`;
   } else {
@@ -91,6 +182,24 @@ function onClickButtonElegir(tipos, listaLugares) {
   }
 }
 
+// Registrar tipo de estacionamiento
+
+function registrarTipos(tipos,listaLugares){
+  // localStorage.
+  if (JSON.parse(localStorage.getItem('tipos')) != null){
+    return setInterval(setCantidadTipos(tipos, listaLugares), 1000);  // cada 1 segundos
+  } else {
+    console.log('No habia datos en el localStorage');
+    fijarLugares(listaLugares);
+    fijarColores();  
+    return setInterval(setCantidadTipos(tipos, listaLugares), 1000);  // cada 1 segundos    
+  }
+}
+
+// Activar con click en boton
+
+const elegirColorEstacionamiento = document.querySelector(".elegirColor_button");
+elegirColorEstacionamiento.addEventListener('click', function(){onClickButtonElegir(tipos, listaLugares)}, false);
 
 
 
